@@ -17,8 +17,11 @@ class SkipToContentElement extends HTMLElement {
   updateStyle() {
     this._style.textContent = `
       .skip-link {
+        min-width: 44px;
+        min-height: 44px;
+        text-align: center;
         position: absolute;
-        top: -40px;
+        top: -64px;
         left: 10px;
         background-color: #333;
         color: white;
@@ -28,8 +31,9 @@ class SkipToContentElement extends HTMLElement {
         z-index: 1000;
         transition: opacity 0.3s ease, top 0.3s ease;
         text-decoration: none;
-        cursor: pointer; /* Tambahkan cursor pointer */
-      }
+        cursor: pointer;
+        line-height: 44px;
+    }
 
       .skip-link:hover {
         background-color: #555; /* Tambahkan hover effect */

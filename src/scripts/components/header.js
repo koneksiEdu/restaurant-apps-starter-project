@@ -106,7 +106,9 @@ class AppHeader extends HTMLElement {
         font-size: 32px;
         margin: 10px auto;
         display: block;
-        width: 30px;
+        width: 44px;
+        min-width: 44px;
+        min-height: 44px;
         cursor: pointer;
         position: absolute;
         right: 20px;
@@ -137,6 +139,8 @@ class AppHeader extends HTMLElement {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
       }
 
       .nav--open {
@@ -176,6 +180,8 @@ class AppHeader extends HTMLElement {
           background-color: transparent;
           transform: none;
           display: block;
+          min-width: 44px;
+          min-height: 44px;
         }
 
         .nav__list {

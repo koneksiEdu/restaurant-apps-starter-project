@@ -36,6 +36,8 @@ class RestaurantList extends HTMLElement {
       }
 
       .restaurant-card {
+        min-width: 44px;
+        min-height: 44px;
         background: #fff;
         border-radius: 8px;
         padding: 16px;
