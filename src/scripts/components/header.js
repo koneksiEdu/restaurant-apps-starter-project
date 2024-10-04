@@ -157,12 +157,14 @@ class AppHeader extends HTMLElement {
 
       .nav__item {
         padding: 15px 0;
+        min-width: 44px;
+        min-height: 44px;
       }
 
       .nav a {
         text-decoration: none;
         color: white;
-        font-size: 24px;
+        font-size: 44px;
       }
 
       .nav a:hover {
