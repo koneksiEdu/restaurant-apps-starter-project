@@ -114,6 +114,7 @@ class AppHeader extends HTMLElement {
         right: 20px;
         top: 10px;
         z-index: 1002;
+        text-align: center;
       }
 
       .header__menu {
