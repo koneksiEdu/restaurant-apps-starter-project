@@ -1,10 +1,10 @@
 class JumbotronElement extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
 
     // Style jumbotron
-    this._style = document.createElement("style");
+    this._style = document.createElement('style');
     this._shadowRoot.appendChild(this._style);
   }
 
@@ -81,4 +81,4 @@ class JumbotronElement extends HTMLElement {
 }
 
 // Daftarkan custom element
-customElements.define("jumbotron-element", JumbotronElement);
+customElements.define('jumbotron-element', JumbotronElement);

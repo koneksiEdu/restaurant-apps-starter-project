@@ -1,8 +1,8 @@
 class RestaurantList extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this._shadowRoot.appendChild(this._style);
   }
 
@@ -77,8 +77,8 @@ class RestaurantList extends HTMLElement {
         <h2>Explore Restaurants</h2>
         <div class="grid-container">
           ${this.restaurants
-            .map((restaurant) => this.createCard(restaurant))
-            .join('')}
+    .map((restaurant) => this.createCard(restaurant))
+    .join('')}
         </div>
       </section>
     `;
@@ -102,4 +102,4 @@ class RestaurantList extends HTMLElement {
   }
 }
 
-customElements.define("restaurant-list", RestaurantList);
+customElements.define('restaurant-list', RestaurantList);

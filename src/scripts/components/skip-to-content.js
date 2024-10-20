@@ -1,8 +1,8 @@
 class SkipToContentElement extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render(); // Panggil render di dalam constructor
   }
 
@@ -43,9 +43,9 @@ class SkipToContentElement extends HTMLElement {
         top: 10px;
       }
     `;
-    
+
     // Tambahkan style ke shadow DOM setelah konten
-    this._shadowRoot.appendChild(this._style); 
+    this._shadowRoot.appendChild(this._style);
   }
 
   render() {
@@ -58,4 +58,4 @@ class SkipToContentElement extends HTMLElement {
   }
 }
 
-customElements.define("skip-to-content", SkipToContentElement);
+customElements.define('skip-to-content', SkipToContentElement);

@@ -1,10 +1,10 @@
 class FooterElement extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
 
     // Style footer
-    this._style = document.createElement("style");
+    this._style = document.createElement('style');
     this._shadowRoot.appendChild(this._style);
   }
 
@@ -39,4 +39,4 @@ class FooterElement extends HTMLElement {
     this._shadowRoot.innerHTML += template;
   }
 }
-customElements.define("app-footer", FooterElement);  
+customElements.define('app-footer', FooterElement);

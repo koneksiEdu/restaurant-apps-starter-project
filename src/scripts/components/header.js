@@ -1,8 +1,8 @@
 class AppHeader extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this._shadowRoot.appendChild(this._style);
     this.toggleNav = this.toggleNav.bind(this);
     this.handleResize = this.handleResize.bind(this);
@@ -12,67 +12,67 @@ class AppHeader extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this._shadowRoot.querySelector("#menu").addEventListener("click", this.toggleNav);
-    this._shadowRoot.querySelector("#close-menu").addEventListener("click", this.toggleNav);
-    this._shadowRoot.querySelector("#menu").addEventListener("keydown", this.handleKeyDown); // Add keydown listener
-    this._shadowRoot.querySelector("#close-menu").addEventListener("keydown", this.handleKeyDown); // Add keydown listener
-    window.addEventListener("resize", this.handleResize);
+    this._shadowRoot.querySelector('#menu').addEventListener('click', this.toggleNav);
+    this._shadowRoot.querySelector('#close-menu').addEventListener('click', this.toggleNav);
+    this._shadowRoot.querySelector('#menu').addEventListener('keydown', this.handleKeyDown); // Add keydown listener
+    this._shadowRoot.querySelector('#close-menu').addEventListener('keydown', this.handleKeyDown); // Add keydown listener
+    window.addEventListener('resize', this.handleResize);
     // Listen for click events on the document to close offcanvas when clicking outside
-    this._shadowRoot.addEventListener("click", this.handleClickOutside);
+    this._shadowRoot.addEventListener('click', this.handleClickOutside);
     this.handleResize();
   }
 
   disconnectedCallback() {
-    this._shadowRoot.querySelector("#menu").removeEventListener("click", this.toggleNav);
-    this._shadowRoot.querySelector("#close-menu").removeEventListener("click", this.toggleNav);
-    this._shadowRoot.querySelector("#menu").removeEventListener("keydown", this.handleKeyDown); // Remove keydown listener
-    this._shadowRoot.querySelector("#close-menu").removeEventListener("keydown", this.handleKeyDown); // Remove keydown listener
-    window.removeEventListener("resize", this.handleResize);
-    this._shadowRoot.removeEventListener("click", this.handleClickOutside);
+    this._shadowRoot.querySelector('#menu').removeEventListener('click', this.toggleNav);
+    this._shadowRoot.querySelector('#close-menu').removeEventListener('click', this.toggleNav);
+    this._shadowRoot.querySelector('#menu').removeEventListener('keydown', this.handleKeyDown); // Remove keydown listener
+    this._shadowRoot.querySelector('#close-menu').removeEventListener('keydown', this.handleKeyDown); // Remove keydown listener
+    window.removeEventListener('resize', this.handleResize);
+    this._shadowRoot.removeEventListener('click', this.handleClickOutside);
   }
 
   toggleNav() {
-    const drawer = this._shadowRoot.querySelector("#drawer");
-    const menuButton = this._shadowRoot.querySelector("#menu");
-    const closeMenuButton = this._shadowRoot.querySelector("#close-menu");
-    drawer.classList.toggle("nav--open");
+    const drawer = this._shadowRoot.querySelector('#drawer');
+    const menuButton = this._shadowRoot.querySelector('#menu');
+    const closeMenuButton = this._shadowRoot.querySelector('#close-menu');
+    drawer.classList.toggle('nav--open');
 
-    if (drawer.classList.contains("nav--open")) {
-      menuButton.style.display = "none"; 
-      closeMenuButton.style.display = "block";
+    if (drawer.classList.contains('nav--open')) {
+      menuButton.style.display = 'none';
+      closeMenuButton.style.display = 'block';
       // Set focus to the close button when the drawer opens
       closeMenuButton.focus();
     } else {
-      menuButton.style.display = "block";
-      closeMenuButton.style.display = "none";
+      menuButton.style.display = 'block';
+      closeMenuButton.style.display = 'none';
     }
   }
 
   handleClickOutside(event) {
-    const drawer = this._shadowRoot.querySelector("#drawer");
-    if (drawer.classList.contains("nav--open") && !drawer.contains(event.target) && event.target.id !== "menu") {
+    const drawer = this._shadowRoot.querySelector('#drawer');
+    if (drawer.classList.contains('nav--open') && !drawer.contains(event.target) && event.target.id !== 'menu') {
       this.toggleNav(); // Close the drawer if clicking outside of it
     }
   }
 
   handleResize() {
-    const menuButton = this._shadowRoot.querySelector("#menu");
-    const closeMenuButton = this._shadowRoot.querySelector("#close-menu");
-    const drawer = this._shadowRoot.querySelector("#drawer");
+    const menuButton = this._shadowRoot.querySelector('#menu');
+    const closeMenuButton = this._shadowRoot.querySelector('#close-menu');
+    const drawer = this._shadowRoot.querySelector('#drawer');
 
     if (window.innerWidth >= 768) {
-      menuButton.style.display = "none";
-      closeMenuButton.style.display = "none";
+      menuButton.style.display = 'none';
+      closeMenuButton.style.display = 'none';
 
-      drawer.classList.remove("nav--open");
+      drawer.classList.remove('nav--open');
     } else {
-      menuButton.style.display = "block";
+      menuButton.style.display = 'block';
     }
   }
 
   handleKeyDown(event) {
     // Check if the key pressed is Enter or Space
-    if (event.key === "Enter" || event.key === " ") {
+    if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault(); // Prevent the default action to avoid scrolling
       this.toggleNav(); // Call toggleNav to open/close the offcanvas
     }
@@ -227,4 +227,4 @@ class AppHeader extends HTMLElement {
   }
 }
 
-customElements.define("app-header", AppHeader);
+customElements.define('app-header', AppHeader);
