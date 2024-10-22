@@ -50,7 +50,7 @@ class SkipToContentElement extends HTMLElement {
 
   render() {
     const template = `
-      <a href="#maincontent" tabindex="0" class="skip-link">
+      <a href="#mainContent" tabindex="0" class="skip-link">
         Skip to Contents
       </a>
     `;

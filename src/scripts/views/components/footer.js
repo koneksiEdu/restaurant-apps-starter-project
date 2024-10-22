@@ -18,10 +18,13 @@ class FooterElement extends HTMLElement {
         background-color: #333;
         color: white;
         text-align: center;
-        
-        position: relative;
+        position: fixed;
         bottom: 0;
-        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        width: 96%;
         font-size: 1.5em;
         padding: 8px 0;
       }
@@ -39,4 +42,5 @@ class FooterElement extends HTMLElement {
     this._shadowRoot.innerHTML += template;
   }
 }
+
 customElements.define('app-footer', FooterElement);
