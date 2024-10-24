@@ -10,6 +10,12 @@ const AllRestoData = {
         <h1 class="jumbotron__header">AtlasRasa</h1>
         <p class="jumbotron__lead">Discover the best restaurants in town and explore our exclusive catalog of fine dining and local gems.</p>
       </div>
+
+      <div class="search-form">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search for restaurants..." required />
+        <button id="searchButton" class="search-button">Search</button>
+      </div>
+
       <section class="restaurant-list">
         <h2>Explore Restaurants</h2>
         <div id="restaurants"></div>
@@ -19,17 +25,52 @@ const AllRestoData = {
 
   async afterRender() {
     LoadingComponent.show();
-    try {
-      const restaurants = await RestaurantSource.listRestaurant();
-      const restosContainer = document.querySelector('#restaurants');
-      restaurants.forEach((restaurant) => {
-        restosContainer.innerHTML += createRestaurantItemTemplate(restaurant);
-      });
-    } catch (error) {
-      console.error('Failed to load restaurants:', error);
-    } finally {
-      LoadingComponent.hide();
-    }
+
+    const restosContainer = document.querySelector('#restaurants');
+    const searchInput = document.querySelector('#searchInput');
+    const searchButton = document.querySelector('#searchButton');
+
+    const loadRestaurants = async (query = '') => {
+      restosContainer.innerHTML = '';
+      try {
+        const restaurants = query
+          ? await RestaurantSource.searchRestaurant(query)
+          : await RestaurantSource.listRestaurant();
+
+        if (restaurants.length > 0) {
+          restaurants.forEach((restaurant) => {
+            restosContainer.innerHTML += createRestaurantItemTemplate(restaurant);
+          });
+        } else {
+          restosContainer.innerHTML = '<p>No restaurants found.</p>';
+        }
+      } catch (error) {
+        console.error('Failed to load restaurants:', error);
+        restosContainer.innerHTML = '<p>Failed to load restaurants. Please try again later.</p>';
+      } finally {
+        LoadingComponent.hide();
+      }
+    };
+
+    await loadRestaurants();
+
+    searchButton.addEventListener('click', async () => {
+      const query = searchInput.value.trim();
+      if (query) {
+        LoadingComponent.show();
+        await loadRestaurants(query);
+      }
+    });
+
+    searchInput.addEventListener('keydown', async (event) => {
+      if (event.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query) {
+          LoadingComponent.show();
+          await loadRestaurants(query);
+        }
+      }
+    });
   },
 };
 

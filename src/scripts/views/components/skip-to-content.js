@@ -8,10 +8,27 @@ class SkipToContentElement extends HTMLElement {
 
   connectedCallback() {
     this.updateStyle(); // Update style saat komponen terhubung
+
+    // Tambahkan listener untuk skip-to-content
+    const skipLinkElem = this._shadowRoot.querySelector('.skip-link');
+    skipLinkElem.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      // Fokuskan ke elemen mainContent
+      const mainContent = document.querySelector('#mainContent');
+      if (mainContent) {
+        mainContent.setAttribute('tabindex', '-1');  // Pastikan bisa di-fokus
+        mainContent.focus();  // Pindahkan fokus ke elemen mainContent
+      }
+    });
   }
 
   disconnectedCallback() {
     this.removeEventListener('keydown', this._handleKeyDown);
+    const skipLinkElem = this._shadowRoot.querySelector('.skip-link');
+    if (skipLinkElem) {
+      skipLinkElem.removeEventListener('click', this._handleSkipClick);
+    }
   }
 
   updateStyle() {
@@ -33,10 +50,10 @@ class SkipToContentElement extends HTMLElement {
         text-decoration: none;
         cursor: pointer;
         line-height: 44px;
-    }
+      }
 
       .skip-link:hover {
-        background-color: #555; /* Tambahkan hover effect */
+        background-color: #555;
       }
 
       .skip-link:focus {
@@ -44,7 +61,6 @@ class SkipToContentElement extends HTMLElement {
       }
     `;
 
-    // Tambahkan style ke shadow DOM setelah konten
     this._shadowRoot.appendChild(this._style);
   }
 

@@ -3,6 +3,7 @@ import RestaurantSource from '../../data/restaurant-source';
 import { createRestaurantDetailTemplate, createLikeButtonTemplate } from '../../templates/template-creator';
 import LikeButtonInitiator from '../../utils/like-button-initiator';
 import LoadingComponent from '../components/loading';
+import CONFIG from '../../global/config';
 
 const Detail = {
   async render() {
@@ -15,33 +16,68 @@ const Detail = {
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
 
-    // Tampilkan komponen loading
     LoadingComponent.show();
 
     try {
-      const restaurant = await RestaurantSource.detailRestaurant(url.id);
-      const restaurantContainer = document.querySelector('#restaurant');
-      const likeButtonContainer = document.querySelector('#likeButtonContainer');
+      await this._renderRestaurantDetail(url);
 
-      likeButtonContainer.innerHTML = createLikeButtonTemplate();
-      restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant.restaurant);
+      document.querySelector('#addReviewForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-      LikeButtonInitiator.init({
-        likeButtonContainer: document.querySelector('#likeButtonContainer'),
-        resto: {
-          id: restaurant.restaurant.id,
-          name: restaurant.restaurant.name,
-          city: restaurant.restaurant.city,
-          pictureId: restaurant.restaurant.pictureId,
-          rating: restaurant.restaurant.rating
-        },
+        const name = document.querySelector('#name').value;
+        const review = document.querySelector('#review').value;
+        const id = url.id;
+
+        const reviewData = {
+          id,
+          name,
+          review,
+        };
+
+        try {
+          const response = await fetch(`${CONFIG.BASE_URL}/review`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reviewData),
+          });
+
+          const result = await response.json();
+
+          if (!result.error) {
+            await this._renderRestaurantDetail(url);
+          }
+        } catch (error) {
+          console.error('Failed to submit review', error);
+        }
       });
+
     } catch (error) {
       console.error('Error loading restaurant:', error);
     } finally {
-      // Sembunyikan komponen loading setelah data selesai di-load
       LoadingComponent.hide();
     }
+  },
+
+  async _renderRestaurantDetail(url) {
+    const restaurant = await RestaurantSource.detailRestaurant(url.id);
+    const restaurantContainer = document.querySelector('#restaurant');
+    const likeButtonContainer = document.querySelector('#likeButtonContainer');
+
+    restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant.restaurant);
+
+    likeButtonContainer.innerHTML = createLikeButtonTemplate();
+    LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      resto: {
+        id: restaurant.restaurant.id,
+        name: restaurant.restaurant.name,
+        city: restaurant.restaurant.city,
+        pictureId: restaurant.restaurant.pictureId,
+        rating: restaurant.restaurant.rating,
+      },
+    });
   },
 };
 
