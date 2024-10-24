@@ -1,5 +1,7 @@
 import RestaurantSource from '../../data/restaurant-source';
 import { createRestaurantItemTemplate } from '../../templates/template-creator';
+import LoadingComponent from '../components/loading';
+
 const AllRestoData = {
   async render() {
     return `
@@ -10,18 +12,24 @@ const AllRestoData = {
       </div>
       <section class="restaurant-list">
         <h2>Explore Restaurants</h2>
-        <div id="restaurants">
-        </div>
+        <div id="restaurants"></div>
       </section>
     `;
   },
 
   async afterRender() {
-    const restaurants = await RestaurantSource.listRestaurant();
-    const moviesContainer = document.querySelector('#restaurants');
-    restaurants.forEach((restaurant) => {
-      moviesContainer.innerHTML += createRestaurantItemTemplate(restaurant);
-    });
+    LoadingComponent.show();
+    try {
+      const restaurants = await RestaurantSource.listRestaurant();
+      const restosContainer = document.querySelector('#restaurants');
+      restaurants.forEach((restaurant) => {
+        restosContainer.innerHTML += createRestaurantItemTemplate(restaurant);
+      });
+    } catch (error) {
+      console.error('Failed to load restaurants:', error);
+    } finally {
+      LoadingComponent.hide();
+    }
   },
 };
 
