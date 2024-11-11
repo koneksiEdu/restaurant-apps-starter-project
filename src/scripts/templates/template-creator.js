@@ -85,11 +85,11 @@ const createRestaurantItemTemplate = (restaurant) => `
     <div class="restaurant-card" role="button" aria-label="${restaurant.name}">
       <img
         crossorigin="anonymous" 
-        src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL + restaurant.pictureId : 'https://picsum.photos/id/666/800/450?grayscale'}" 
+        data-src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL + restaurant.pictureId : 'https://picsum.photos/id/666/800/450?grayscale'}" 
         alt="Image of ${restaurant.name}" 
-        class="restaurant-image" 
+        class="restaurant-image lazyload" 
       />
-      <h3>${restaurant.name}</h3>
+      <h3 class="restaurant__title">${restaurant.name}</h3>
       <p class="city">${restaurant.city}</p>
       <p class="rating">❤️ ${restaurant.rating}</p>
       <a href="/#/detail/${restaurant.id}">CHECK</a>

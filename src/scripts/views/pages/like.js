@@ -6,9 +6,14 @@ const Like = {
   async render() {
     return `
       <div class="jumbotron">
-        <img src="images/heros/hero-image_1.jpg" alt="Gambar Jumbotron">
+        <picture>
+          <source media="(max-width: 600px)" srcset="images/heros/hero-image_1-small.jpg">
+          <source media="(min-width: 601px) and (max-width: 1024px)" srcset="images/heros/hero-image_1-medium.jpg">
+          <source media="(min-width: 1025px)" srcset="images/heros/hero-image_1-large.jpg">
+          <img src="images/heros/hero-image_1.jpg" alt="Gambar Jumbotron">
+        </picture>
         <h1 class="jumbotron__header">AtlasRasa</h1>
-        <p class="jumbotron__lead">Discover your favorite restaurants.</p>
+        <p class="jumbotron__lead">Discover the best restaurants in town and explore our exclusive catalog of fine dining and local gems.</p>
       </div>
 
       <div class="search-form">
@@ -45,7 +50,7 @@ const Like = {
             restosContainer.innerHTML += createRestaurantItemTemplate(restaurant);
           });
         } else {
-          restosContainer.innerHTML = '<p>No favorite restaurants found.</p>';
+          restosContainer.innerHTML = '<p class="resto-item__not__found">No favorite restaurants found.</p>';
         }
       } catch (error) {
         console.error('Failed to load restaurants:', error);

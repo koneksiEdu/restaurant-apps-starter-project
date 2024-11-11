@@ -8,7 +8,10 @@
     "build": "webpack --config webpack.prod.js",
     "serve": "http-server dist --port 9000",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "e2e": "codeceptjs run --steps",
+    "build-image": "node sharp.js",
+    "start": "cd dist && npm run serve"
   },
   "keywords": [],
   "author": "your_name <your.email@domain.com>",
@@ -22,6 +25,7 @@
     "babel-jest": "^29.6.1",
     "babel-loader": "^8.4.1",
     "clean-webpack-plugin": "^4.0.0",
+    "codeceptjs": "^3.6.7",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.11.0",
     "eslint": "^9.13.0",
@@ -30,10 +34,15 @@
     "globals": "^15.11.0",
     "html-webpack-plugin": "^5.6.2",
     "http-server": "^14.1.1",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-webpack-plugin": "^2.4.2",
     "jest": "^29.6.1",
     "jest-environment-jsdom": "^29.6.1",
+    "playwright": "^1.48.2",
+    "sharp": "^0.33.5",
     "style-loader": "^3.3.4",
     "webpack": "^5.95.0",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.2",
     "webpack-merge": "^5.10.0",
@@ -43,6 +52,7 @@
   },
   "dependencies": {
     "idb": "^8.0.0",
+    "lazysizes": "^5.3.2",
     "regenerator-runtime": "^0.14.1"
   }
 }

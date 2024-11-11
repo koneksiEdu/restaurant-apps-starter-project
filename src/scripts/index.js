@@ -3,6 +3,8 @@ import '../styles/main.css';
 import './views/components/indexComponents.js';
 import App from './views/app';
 import swRegister from './utils/sw-register.js';
+import 'lazysizes/plugins/bgset/ls.bgset';
+import 'lazysizes/plugins/attrchange/ls.attrchange';
 
 const app = new App({
   button: document.querySelector('#hamburgerButton'),
