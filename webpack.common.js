@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+require('dotenv').config();
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -22,12 +23,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
         ],
       },
     ],
@@ -58,7 +55,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
 
-    new BundleAnalyzerPlugin(),
+    ...(process.env.ANALYZE === 'true' ? [new BundleAnalyzerPlugin()] : []),
 
     new HtmlWebpackPlugin({
       filename: 'index.html',
