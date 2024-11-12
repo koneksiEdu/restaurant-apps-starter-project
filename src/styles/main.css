@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 img {
   display: block;
 }
@@ -15,7 +21,6 @@ img {
   align-items: center;
   overflow: hidden;
   text-align: center;
-  padding-top: 56px;
 }
 
 .jumbotron picture,
@@ -41,14 +46,14 @@ img {
   font-size: 3em;
   font-weight: bold;
   margin: 0;
-  color: white; /* Warna teks putih agar kontras */
+  color: white;
 }
 
 .jumbotron__lead {
   font-size: 1.5em;
   margin: 0.5em 0;
   max-width: 800px;
-  color: white; /* Warna teks putih */
+  color: white;
 }
 
 /* Reataurant list stuff */
@@ -67,7 +72,7 @@ h2 {
 
 #restaurants {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 }
 
@@ -382,7 +387,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;  /* Z-index paling atas */
+  z-index: 9999;
 }
 
 .spinner {

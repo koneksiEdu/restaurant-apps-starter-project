@@ -30,7 +30,7 @@ describe('Unliking a Restaurant', () => {
     expect(unlikeButton).toBeFalsy();
   });
 
-  it('should be able to remove liked movie from the list', async () => {
+  it('should be able to remove liked restaurant from the list', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1, name: 'Restaurant Test' });
 
     document.querySelector('[aria-label="unlike this resto"]').dispatchEvent(new Event('click'));

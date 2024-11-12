@@ -35,7 +35,7 @@ describe('Liking a Restaurant', () => {
     await FavoriteRestaurantDb.deleteResto(1);
   });
 
-  it('should not add a restaurant again when it\'s already liked', async () => {
+  it('should not add a restaurant again when it is already liked', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1, name: 'Restaurant Test' });
 
     await FavoriteRestaurantDb.putResto({ id: 1, name: 'Restaurant Test' });

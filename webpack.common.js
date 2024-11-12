@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-require('dotenv').config();
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -8,6 +7,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
 const ImageminMozjpeg = require('imagemin-mozjpeg');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -30,6 +30,10 @@ module.exports = {
     ],
   },
   optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
     splitChunks: {
       chunks: 'all',
       minSize: 20000,
@@ -55,7 +59,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
 
-    ...(process.env.ANALYZE === 'true' ? [new BundleAnalyzerPlugin()] : []),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
+    }),
 
     new HtmlWebpackPlugin({
       filename: 'index.html',

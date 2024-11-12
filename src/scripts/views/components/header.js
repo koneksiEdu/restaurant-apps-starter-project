@@ -16,7 +16,7 @@ class AppHeader extends HTMLElement {
         grid-template-columns: auto 1fr auto;
         gap: 10px;
         position: fixed;
-        width: 95%;
+        width: 100%;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
